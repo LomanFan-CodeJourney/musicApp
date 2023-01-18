@@ -50,38 +50,22 @@ const musicMenu = [
   },
 ];
 
-const Sidebar = () => (
-  <Box
-    width="100%"
-    height="calc(100vh - 100px)"
-    bg="black"
-    paddingX="5px"
-    color="gray"
-  >
-    <Box paddingY="20px">
-      <Box width="195px" marginBottom="0px" paddingX="20px">
-        <NextImage src="/moosic-monk-logo.svg" height={60} width={150} />
-      </Box>
-      <Box marginBottom="20px">
-        <List spacing={2}>
-          {navMenu.map((item) => (
-            <ListItem paddingX="20px" fontSize="16px" key={item.name}>
-              <LinkBox>
-                <NextLink href={item.route} passHref>
-                  <LinkOverlay>
-                    <ListIcon as={item.icon} color="white" marginRight="20px" />
-                    {item.name}
-                  </LinkOverlay>
-                </NextLink>
-              </LinkBox>
-            </ListItem>
-          ))}
-        </List>
-      </Box>
-      <Box marginTop="20px">
-        <List spacing={2}>
-          {musicMenu.map((item) => {
-            return (
+const Sidebar = () => {
+  return (
+    <Box
+      width="100%"
+      height="calc(100vh - 100px)"
+      bg="black"
+      paddingX="5px"
+      color="gray"
+    >
+      <Box paddingY="20px">
+        <Box width="195px" marginBottom="0px" paddingX="20px">
+          <NextImage src="/moosic-monk-logo.svg" height={60} width={150} />
+        </Box>
+        <Box marginBottom="20px">
+          <List spacing={2}>
+            {navMenu.map((item) => (
               <ListItem paddingX="20px" fontSize="16px" key={item.name}>
                 <LinkBox>
                   <NextLink href={item.route} passHref>
@@ -96,13 +80,38 @@ const Sidebar = () => (
                   </NextLink>
                 </LinkBox>
               </ListItem>
-            );
-          })}
-        </List>
+            ))}
+          </List>
+        </Box>
+        <Box marginTop="20px">
+          <List spacing={2}>
+            {musicMenu.map((item) => (
+              <ListItem paddingX="20px" fontSize="16px" key={item.name}>
+                <LinkBox>
+                  <NextLink href={item.route} passHref>
+                    <LinkOverlay>
+                      <ListIcon
+                        as={item.icon}
+                        color="white"
+                        marginRight="20px"
+                      />
+                      {item.name}
+                    </LinkOverlay>
+                  </NextLink>
+                </LinkBox>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+        <Divider color="gray.800" />
+        <Box height="66%" overflowY="auto" paddingY="20px">
+          {new Array(50).fill(1).map(() => (
+            <h1>hi</h1>
+          ))}
+        </Box>
       </Box>
-      <Divider color="gray.800" />
     </Box>
-  </Box>
-);
+  );
+};
 
 export default Sidebar;
