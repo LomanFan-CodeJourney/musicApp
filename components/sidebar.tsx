@@ -59,7 +59,7 @@ const Sidebar = () => {
       paddingX="5px"
       color="gray"
     >
-      <Box paddingY="20px">
+      <Box paddingY="20px" height="100%">
         <Box width="195px" marginBottom="0px" paddingX="20px">
           <NextImage src="/moosic-monk-logo.svg" height={60} width={150} />
         </Box>
