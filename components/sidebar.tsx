@@ -37,42 +37,72 @@ const navMenu = [
   },
 ];
 
-const Sidebar = () => {
-  return (
-    <Box
-      width="100%"
-      height="calc(100vh - 100px)"
-      bg="black"
-      paddingX="5px"
-      color="gray"
-    >
-      <Box paddingY="20px">
-        <Box width="195px" marginBottom="0px" paddingX="20px">
-          <NextImage src="/moosic-monk-logo.svg" height={60} width={150} />
-        </Box>
-        <Box marginBottom="20px">
-          <List spacing={2}>
-            {navMenu.map((menuItem) => (
-              <ListItem paddingX="20px" fontSize="16px" key={menuItem.name}>
+const musicMenu = [
+  {
+    name: 'Create Playlist',
+    icon: MdPlaylistAdd,
+    route: '/',
+  },
+  {
+    name: 'Favorities',
+    icon: MdFavorite,
+    route: '/favorites',
+  },
+];
+
+const Sidebar = () => (
+  <Box
+    width="100%"
+    height="calc(100vh - 100px)"
+    bg="black"
+    paddingX="5px"
+    color="gray"
+  >
+    <Box paddingY="20px">
+      <Box width="195px" marginBottom="0px" paddingX="20px">
+        <NextImage src="/moosic-monk-logo.svg" height={60} width={150} />
+      </Box>
+      <Box marginBottom="20px">
+        <List spacing={2}>
+          {navMenu.map((item) => (
+            <ListItem paddingX="20px" fontSize="16px" key={item.name}>
+              <LinkBox>
+                <NextLink href={item.route} passHref>
+                  <LinkOverlay>
+                    <ListIcon as={item.icon} color="white" marginRight="20px" />
+                    {item.name}
+                  </LinkOverlay>
+                </NextLink>
+              </LinkBox>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
+      <Box marginTop="20px">
+        <List spacing={2}>
+          {musicMenu.map((item) => {
+            return (
+              <ListItem paddingX="20px" fontSize="16px" key={item.name}>
                 <LinkBox>
-                  <NextLink href={menuItem.route} passHref>
+                  <NextLink href={item.route} passHref>
                     <LinkOverlay>
                       <ListIcon
-                        as={menuItem.icon}
+                        as={item.icon}
                         color="white"
                         marginRight="20px"
                       />
-                      {menuItem.name}
+                      {item.name}
                     </LinkOverlay>
                   </NextLink>
                 </LinkBox>
               </ListItem>
-            ))}
-          </List>
-        </Box>
+            );
+          })}
+        </List>
       </Box>
+      <Divider color="gray.800" />
     </Box>
-  );
-};
+  </Box>
+);
 
 export default Sidebar;
