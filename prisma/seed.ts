@@ -8,6 +8,7 @@ const run = async () => {
   await Promise.all(
     artistsData.map((artist) =>
       prisma.artist.upsert({
+        // upsert - create or update
         where: { name: artist.name },
         update: {},
         create: {
