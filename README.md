@@ -8,13 +8,13 @@ First, clone this repository and install the dependencies:
 git clone git@github.com:LomanFan-CodeJourney/musicApp.git
 ```
 
-Change Directories
+Change Directories:
 
 ```bash
 cd musicApp
 ```
 
-Install Dependencies
+Install Dependencies:
 
 ```bash
 npm install
@@ -28,32 +28,39 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Setup database
+
+Setup database:
 
 ```bash
 npx prisma init
 ```
 
-Synchronize Prisma schema changes with db schema, prototype a change to an existing schema
+Synchronize Prisma schema changes with db schema, prototype a change to an existing schema:
 
 ```bash
 npx prisma db push
 ```
 
-Generate a migration from changes
+Generate a migration from changes:
 
 ```bash
 npx prisma migrate dev
 ```
 
-Seed db
+Seed db:
 
 ```bash
 npx prisma db seed
 ```
 
-Open db
+Open db:
 
 ```bash
 npx prisma studio
+```
+
+Drop/Reset whole db, use only after all latest migrations are done, for this we run "npx prisma db push" and "npx prisma migrate dev" first then reset db with the following command:
+
+```bash
+npx prisma migrate reset
 ```
