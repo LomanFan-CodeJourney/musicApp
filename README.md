@@ -1,4 +1,4 @@
-This is a full-stack music app built with Next.js, Typescript, Prisma & PostgreSQL. 
+This is a full-stack music app built with Next.js, Typescript, Prisma & PostgreSQL.
 
 ### Instructions
 
@@ -26,8 +26,7 @@ After installing the dependencies, run the development server:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. 
-
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 Setup database
 
@@ -36,11 +35,25 @@ npx prisma init
 ```
 
 Synchronize Prisma schema changes with db schema, prototype a change to an existing schema
+
 ```bash
 npx prisma db push
 ```
 
 Generate a migration from changes
+
 ```bash
 npx prisma migrate dev
+```
+
+Seed db
+
+```bash
+npx prisma db seed
+```
+
+Open db
+
+```bash
+npx prisma studio
 ```
