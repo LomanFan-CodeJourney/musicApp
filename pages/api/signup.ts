@@ -24,20 +24,22 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const token = jwt.sign(
+    // generate a JWT
     {
       email: user.email,
       id: user.id,
       time: Date.now(),
     },
-    "hello",
+    "hello", // my secret, to be moved to .evn file
     { expiresIn: "8h" }
   );
 
   res.setHeader(
+    // set JWT in a cookie
     "Set-Cookie",
     cookie.serialize("TRAX_ACCESS_TOKEN", token, {
-      httpOnly: true,
-      maxAge: 8 * 60 * 60,
+      httpOnly: true, // can only be accessed by HTTP requests not JS
+      maxAge: 8 * 60 * 60, // 8 hours (by milliseconds)
       path: "/",
       sameSite: "lax",
       secure: process.env.NODE_ENV === "production",
