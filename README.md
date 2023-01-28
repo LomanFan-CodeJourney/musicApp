@@ -64,3 +64,12 @@ Drop/Reset whole db, use only after all latest migrations are done, for this we 
 ```bash
 npx prisma migrate reset
 ```
+
+Other
+API Testing Tool - HTTPie
+```bash
+http POST :3000/api/signup email=123@gmail.com password=123123
+
+http POST :3000/api/signin email=user@test.com password=password
+
+```
