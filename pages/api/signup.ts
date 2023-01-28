@@ -40,9 +40,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     cookie.serialize("TRAX_ACCESS_TOKEN", token, {
       httpOnly: true, // can only be accessed by HTTP requests not JS
       maxAge: 8 * 60 * 60, // 8 hours (by milliseconds)
-      path: "/",
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
+      path: "/", // cookie available whole site
+      sameSite: "lax", // cookie share with 3rd party
+      secure: process.env.NODE_ENV === "production", // should be encrypted on production
     })
   );
 
