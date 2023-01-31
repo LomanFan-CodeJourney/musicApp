@@ -5,7 +5,7 @@ export default function fetcher(url: string, data = undefined) {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data), // in case not working, set data type to undefined
+    body: JSON.stringify(data), // set data type to undefined, so it doesn't break
   });
 }
 
