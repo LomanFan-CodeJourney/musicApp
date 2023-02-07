@@ -2,13 +2,16 @@
 // import Head from 'next/head';
 // import Image from 'next/image';
 // import styles from '../styles/Home.module.css';
-import {Box, Text, Flex} from '@chakra-ui/layout';
-import {Image} from '@chakra-ui/react';
+import { Box, Text, Flex } from '@chakra-ui/layout';
+import { Image } from '@chakra-ui/react';
 import GradientLayout from '../components/gradientLayout';
 import prisma from '../lib/prisma';
+import { useMe } from '../lib/hooks';
 
 const Home = ({artists}) => {
-  return (<GradientLayout roundImage color="green" subtitle="profile" title="Loman Fan" description="15 public playlists" image="/profile-picture.jpg">
+  const { user } = useMe();
+
+  return (<GradientLayout roundImage color="green" subtitle="profile" title={`${user?.firstName} ${user?.lastName}`} description="15 public playlists" image="/profile-picture.jpg">
     <div>Homepage</div>
     <Box color="white" paddingX="40px">
       <Box marginBottom="40px">
