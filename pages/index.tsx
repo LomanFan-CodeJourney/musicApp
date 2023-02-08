@@ -11,7 +11,7 @@ import { useMe } from '../lib/hooks';
 const Home = ({artists}) => {
   const { user } = useMe();
 
-  return (<GradientLayout roundImage color="green" subtitle="profile" title={`${user?.firstName} ${user?.lastName}`} description="15 public playlists" image="/profile-picture.jpg">
+  return (<GradientLayout roundImage color="green" subtitle="profile" title={`${user?.firstName} ${user?.lastName}`} description={`${user.playlistsCount} public playlists`} image="/profile-picture.jpg">
     <div>Homepage</div>
     <Box color="white" paddingX="40px">
       <Box marginBottom="40px">
