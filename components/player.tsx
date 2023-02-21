@@ -22,7 +22,7 @@ import {
 } from 'react-icons/md';
 import { useStoreActions } from 'easy-peasy';
 
-const Player = () => {
+const Player = ({songs, activeSong}) => {
   const [playing, setPlaying] = useState(true);
   const [index, setIndex] = useState(0);
   const [seek, setSeek] = useState(0);
@@ -44,7 +44,9 @@ const Player = () => {
 
   return (
     <Box>
-      <Box>{/* <ReactHowler playing={playing} src={activeSong?.url} /> */}</Box>
+      <Box>
+        <ReactHowler playing={playing} src={activeSong?.url} />
+      </Box>
       <Center color="gray.600">
         <ButtonGroup>
           <IconButton
