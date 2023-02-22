@@ -29,6 +29,7 @@ const Player = ({songs, activeSong}) => {
   const [repeat, setRepeat] = useState(false);
   const [shuffle, setShuffle] = useState(false);
   const [duration, setDuration] = useState(0.0);
+  const soundRef = useRef(null);
 
   const setPlayState = (value) => {
     setPlaying(value);
@@ -45,7 +46,7 @@ const Player = ({songs, activeSong}) => {
   return (
     <Box>
       <Box>
-        <ReactHowler playing={playing} src={activeSong?.url} />
+        <ReactHowler playing={playing} src={activeSong?.url} ref={soundRef}/>
       </Box>
       <Center color="gray.600">
         <ButtonGroup>
