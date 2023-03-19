@@ -21,11 +21,13 @@ import {
   MdOutlineRepeat,
 } from 'react-icons/md';
 import { useStoreActions } from 'easy-peasy';
+import { formatTime } from '../lib/formatters';
 
 const Player = ({ songs, activeSong }) => {
   const [playing, setPlaying] = useState(true);
   const [index, setIndex] = useState(0);
   const [seek, setSeek] = useState(0);
+  const [isSeeking, setIsSeeking] = useState(false);
   const [repeat, setRepeat] = useState(false);
   const [shuffle, setShuffle] = useState(false);
   const [duration, setDuration] = useState(0.0);
@@ -64,10 +66,35 @@ const Player = ({ songs, activeSong }) => {
     });
   };
 
+  const onEnd = () => {
+    if (repeat) {
+      setSeek(0); // to update the seekBar UI
+      soundRef.current.seek(0);
+    } else {
+      nextSong();
+    }
+  };
+
+  const onLoad = () => {
+    const songDuration = soundRef.current.duration();
+    setDuration(songDuration);
+  };
+
+  const onSeek = (event) => {
+    setSeek(parseFloat(event[0])); // to update the seekBar UI; RangeSlider seeks back a range of values in an array from min to max, and we use the min value here.
+    soundRef.current.seek(event[0]); // set the song the same value as the seekBar UI
+  };
+
   return (
     <Box>
       <Box>
-        <ReactHowler playing={playing} src={activeSong?.url} ref={soundRef} />
+        <ReactHowler
+          playing={playing}
+          src={activeSong?.url}
+          ref={soundRef}
+          onLoad={onLoad}
+          onEnd={onEnd}
+        />
       </Box>
       <Center color="gray.600">
         <ButtonGroup>
@@ -86,6 +113,7 @@ const Player = ({ songs, activeSong }) => {
             aria-label="skip"
             fontSize="24px"
             icon={<MdSkipPrevious />}
+            onClick={prevSong}
           />
           {playing ? (
             <IconButton
@@ -117,6 +145,7 @@ const Player = ({ songs, activeSong }) => {
             aria-label="next"
             fontSize="24px"
             icon={<MdSkipNext />}
+            onClick={nextSong}
           />
           <IconButton
             outline="none"
@@ -139,8 +168,12 @@ const Player = ({ songs, activeSong }) => {
               aria-label={('min', 'max')}
               step={0.1}
               min={0}
-              max={321}
+              max={duration ? duration.toFixed(2) : 0} // set to duration to only show 2 digits
               id="player-range"
+              onChange={onSeek}
+              value={[seek]} // keep track of current value of seekBar, RangeSlider takes in an array
+              onChangeStart={() => setIsSeeking(true)}
+              onChangeEnd={() => setIsSeeking(false)}
             >
               <RangeSliderTrack bg="gray.800">
                 <RangeSliderFilledTrack bg="gray.600" />
@@ -149,7 +182,7 @@ const Player = ({ songs, activeSong }) => {
             </RangeSlider>
           </Box>
           <Box width="10%" textAlign="right">
-            <Text fontSize="xs">3:21</Text>
+            <Text fontSize="xs">{formatTime(duration)}</Text>
           </Box>
         </Flex>
       </Box>
